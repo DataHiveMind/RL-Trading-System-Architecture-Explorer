@@ -1,0 +1,45 @@
+name: Backtest Regression Parity
+
+on:
+  pull_request:
+    # Only run this expensive check if core trading logic or data is touched
+    paths:
+      - 'qts_core/**'
+      - 'data_platform/**'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+
+jobs:
+  parity-check:
+    name: Deterministic Logic Drift Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+        
+      - name: Fetch Golden Dataset (Mocked)
+        run: |
+          # In a real environment, you pull a static, versioned data sample from S3/GCS here.
+          echo "Fetching immutable parity dataset..."
+          
+      - name: Run Deterministic Backtest Parity Suite
+        run: |
+          # This test asserts that running a fixed strategy over the golden data 
+          # yields the EXACT same portfolio PnL to the 4th decimal place.
+          # Any deviation means a researcher accidentally altered core math.
+          echo "Running regression tests..."
+          poetry run pytest tests/integration/test_backtest_parity.py -v --disable-warnings

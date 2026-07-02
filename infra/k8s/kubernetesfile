@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rl-trading-training-job
+  namespace: quant-research
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      containers:
+      - name: ray-trainer
+        image: your-registry.com/enterprise-rl-trading:latest
+        command: ["python3", "-m", "qts_core.models.trainer"]
+        resources:
+          requests:
+            cpu: "8"
+            memory: "32Gi"
+            nvidia.com/gpu: "1"
+          limits:
+            cpu: "16"
+            memory: "64Gi"
+            nvidia.com/gpu: "1"
+        env:
+        - name: MLFLOW_TRACKING_URI
+          value: "http://mlflow-service:5000"
+      restartPolicy: Never
