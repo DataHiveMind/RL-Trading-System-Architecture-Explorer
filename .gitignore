@@ -1,0 +1,91 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+.eggs/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.pyre/
+.ruff_cache/
+.coverage
+.coverage.*
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Poetry / environment
+.poetry/
+.poetry-cache/
+
+# Jupyter / notebooks
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Node / frontend
+node_modules/
+dashboard/frontend/node_modules/
+frontend/node_modules/
+.npm/
+.eslintcache
+.vite/
+coverage/
+
+# Local config / secrets
+.env
+.env.*
+*.local
+secrets.json
+
+# Build outputs
+*.exe
+*.out
+*.bin
+
+# Data / model artifacts
+artifacts/
+checkpoints/
+models/
+mlruns/
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.joblib
+
+# Test outputs
+htmlcov/
+.pytest_cache/
+
+# Git LFS (if used)
+*.psd
+*.mp4
+*.mov
+*.wav
+*.zip
