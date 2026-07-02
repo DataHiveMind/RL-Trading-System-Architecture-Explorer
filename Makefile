@@ -4,13 +4,17 @@ PYTEST := poetry run pytest
 RUFF := poetry run ruff
 MYPY := poetry run mypy
 
-.PHONY: install format lint test train api clean help
+.PHONY: help setup install format lint test train api dashboard clean
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
 	@echo ''
 	@echo 'Targets:'
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+setup: ## Install Python and frontend dependencies for local development
+	poetry install
+	cd dashboard/frontend && npm install
 
 install: ## Install Python dependencies via Poetry and setup pre-commit hooks
 	poetry install
